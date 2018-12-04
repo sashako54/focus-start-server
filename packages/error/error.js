@@ -1,5 +1,5 @@
 module.exports = options => ({
-  type: 'ERROR',
-  code: options.code,
-  value: options.value,
+    type: 'ERROR',
+    code: options.code,
+    value: options.value
 });
