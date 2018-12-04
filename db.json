@@ -1,40 +1,25 @@
 {
-  "tasks": [
-    {
-      "id": "e69fcfb925bbf",
-      "text": "test",
-      "isCompleted": false
-    },
-    {
-      "id": "aef2c11f08ac",
-      "text": "3333333",
-      "isCompleted": false,
-      "test": "2222222"
-    },
-    {
-      "id": "7c0b9675a049b",
-      "text": "test",
-      "isCompleted": false
-    },
-    {
-      "id": "4403f9e760997",
-      "text": "test",
-      "isCompleted": false
-    },
-    {
-      "id": "0ea7e3b0ddd65",
-      "text": "test",
-      "isCompleted": false
-    },
-    {
-      "id": "3d1d3310c5ea2",
-      "text": "test",
-      "isCompleted": false
-    },
-    {
-      "id": "c0aaec4a82c2d",
-      "text": "Тестовая задача",
-      "isCompleted": true
-    }
-  ]
+    "messages": [
+        {
+            "id": "70607890d421a",
+            "name": "user1",
+            "text": "привет, как дела?",
+            "date": "0231851315312",
+            "isCompleted": false
+        },
+        {
+            "id": "6939f15c93b31",
+            "name": "sashako54",
+            "text": "Нормально, а у тебя?",
+            "date": "0231851315312",
+            "isCompleted": false
+        },
+        {
+            "id": "9b49db3af96d7",
+            "name": "user2",
+            "text": "Всем привет!",
+            "date": "0231851315312",
+            "isCompleted": false
+        }
+    ]
 }
