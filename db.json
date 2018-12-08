@@ -21,5 +21,17 @@
             "date": "0231851315312",
             "isCompleted": false
         }
+    ],
+    "users": [
+        {
+            "id": "4469047b78ce",
+            "name": "user1",
+            "chats": ["123", "124"]
+        },
+        {
+            "id": "e1193c408d2c5",
+            "name": "user2",
+            "chats": ["111", "124"]
+        }
     ]
 }
