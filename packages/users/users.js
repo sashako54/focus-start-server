@@ -34,6 +34,17 @@ router.post('/', (req, res, next) => {
     const user = newUser(req.body.name, req.body.chats);
     console.log(user);
 
+    // проверка
+    const existUser = db
+        .get('users')
+        .find({ name: req.body.name })
+        .value();
+
+    if (existUser) {
+        next(new Error('THIS_NICKNAME_ALREADY_EXISTS'));
+        res.json({ status: 'FAIL', data: user });
+    }
+
     db.get('users')
         .push(user)
         .write();
