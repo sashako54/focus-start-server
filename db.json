@@ -33,5 +33,17 @@
             "name": "user2",
             "chats": ["111", "124"]
         }
+    ],
+    "chats": [
+        {
+            "chatId": "f1f87db0abd2f",
+            "users": ["sasha", "evgen"],
+            "messages": []
+        },
+        {
+            "chatId": "63cc25db03fb8",
+            "users": ["sasha", "calipox"],
+            "messages": []
+        }
     ]
 }
