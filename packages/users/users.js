@@ -16,6 +16,8 @@ const newUser = (name, chats) => ({
 router.get('/', (req, res) => {
     const users = db.get('users').value();
 
+    users.map(user => delete user.id);
+
     res.json({ status: 'OK', data: users });
 });
 
