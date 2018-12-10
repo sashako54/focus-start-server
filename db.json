@@ -26,12 +26,12 @@
         {
             "id": "4469047b78ce",
             "name": "sashako",
-            "chats": ["123", "124"]
+            "chats": ["f1f87db0abd2f"]
         },
         {
             "id": "e1193c408d2c5",
             "name": "evgen",
-            "chats": ["111", "124"]
+            "chats": ["f1f87db0abd2f"]
         }
     ],
     "chats": [
@@ -47,16 +47,11 @@
                 },
                 {
                     "id": "f010e4734e7c4",
-                    "name": "sashako",
+                    "name": "evgen",
                     "text": "Привееет",
                     "date": 1544430575100
                 }
             ]
-        },
-        {
-            "chatId": "63cc25db03fb8",
-            "users": ["sasha", "vlad"],
-            "messages": []
         }
     ]
 }

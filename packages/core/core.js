@@ -9,6 +9,12 @@ const chatsRoutes = require('../chats/chats');
 
 const app = express();
 
+// app.use((req, res, next) => {
+//     setTimeout(() => {
+//         next();
+//     }, 2000);
+// });
+
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));

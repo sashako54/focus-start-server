@@ -40,6 +40,17 @@ router.get('/:chatId', (req, res) => {
     res.json({ status: 'OK', data: chat });
 });
 
+// GET /chats/:chatId/messages
+router.get('/:chatId/messages', (req, res) => {
+    const messages = db
+        .get('chats')
+        .find({ chatId: req.params.chatId })
+        .get('messages')
+        .value();
+
+    res.json({ status: 'OK', data: messages });
+});
+
 // POST /chats
 router.post('/', (req, res, next) => {
     const chat = newChat(req.body.users);
