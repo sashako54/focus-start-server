@@ -25,12 +25,12 @@
     "users": [
         {
             "id": "4469047b78ce",
-            "name": "user1",
+            "name": "sashako",
             "chats": ["123", "124"]
         },
         {
             "id": "e1193c408d2c5",
-            "name": "user2",
+            "name": "evgen",
             "chats": ["111", "124"]
         }
     ],
@@ -38,11 +38,18 @@
         {
             "chatId": "f1f87db0abd2f",
             "users": ["sasha", "evgen"],
-            "messages": []
+            "messages": [
+                {
+                    "id": "c213ed8742a9f",
+                    "name": "sasha",
+                    "text": "привет!",
+                    "date": 1544426177036
+                }
+            ]
         },
         {
             "chatId": "63cc25db03fb8",
-            "users": ["sasha", "calipox"],
+            "users": ["sasha", "vlad"],
             "messages": []
         }
     ]

@@ -2,18 +2,19 @@ const router = require('express').Router();
 const db = require('../db/db');
 const { validate } = require('jsonschema');
 
-const newUser = (name, chats) => ({
+const newUser = name => ({
     id: String(
         Math.random()
             .toString(16)
             .split('.')[1]
     ),
     name,
-    chats
+    chats: []
 });
 
 // GET /users
 router.get('/', (req, res) => {
+    console.log('cookie', req.cookies);
     const users = db.get('users').value();
 
     users.map(user => delete user.id);
@@ -33,7 +34,7 @@ router.get('/:id', (req, res) => {
 
 // POST /users
 router.post('/', (req, res, next) => {
-    const user = newUser(req.body.name, req.body.chats);
+    const user = newUser(req.body.name);
     console.log(user);
 
     // проверка
