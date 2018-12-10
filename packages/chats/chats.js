@@ -52,8 +52,9 @@ router.post('/', (req, res, next) => {
     res.json({ status: 'OK', data: chat });
 });
 
+// POST /chats/:chatId/messages
 router.post('/:chatId/messages', (req, res, next) => {
-    const message = newMessage(req.body.name, req.body.text);
+    const message = newMessage(req.cookies.name, req.body.text);
 
     const chat = db
         .get('chats')
@@ -64,7 +65,7 @@ router.post('/:chatId/messages', (req, res, next) => {
 
     console.log(chat);
 
-    res.json({ status: 'OK', data: chat });
+    res.json({ status: 'OK', data: message });
 });
 
 // PATCH /chats/:chatId
