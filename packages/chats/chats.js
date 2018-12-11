@@ -12,15 +12,23 @@ const newChat = users => ({
     messages: []
 });
 
-const newMessage = (name, text) => ({
+const newMessage = (userId, text, usersId) => ({
     id: String(
         Math.random()
             .toString(16)
             .split('.')[1]
     ),
-    name,
+    userId,
     text,
-    date: new Date().getTime()
+    date: new Date().getTime(),
+    isHighlight: usersId.reduce((previousValue, currentValue, index, array) => {
+        previousValue[currentValue] = false;
+        return previousValue;
+    }, {}),
+    isVisible: usersId.reduce((previousValue, currentValue, index, array) => {
+        previousValue[currentValue] = true;
+        return previousValue;
+    }, {})
 });
 
 // GET /chats
@@ -65,7 +73,15 @@ router.post('/', (req, res, next) => {
 
 // POST /chats/:chatId/messages
 router.post('/:chatId/messages', (req, res, next) => {
-    const message = newMessage(req.cookies.name, req.body.text);
+    const usersId = db
+        .get('chats')
+        .find({ chatId: req.params.chatId })
+        .get('usersId')
+        .value();
+
+    console.log('usersId', usersId);
+
+    const message = newMessage(req.cookies.id, req.body.text, usersId);
 
     const chat = db
         .get('chats')
@@ -100,11 +116,11 @@ router.patch('/:chatId', (req, res, next) => {
         .get('messages')
         .find({ id: req.query.id })
         .get('isHighlight')
-        .get(req.query.userId)
+        .get(req.query.myId)
         .toggleBoolean()
-        .write();
+        .value();
 
-    // db.write();
+    db.write();
     console.log('chat', chat);
 
     res.json({ status: 'OK', data: chat });

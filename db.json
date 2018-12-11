@@ -38,6 +38,7 @@
         {
             "chatId": "f1f87db0abd2f",
             "users": ["sasha", "evgen"],
+            "usersId": ["4469047b78ce", "e1193c408d2c5"],
             "messages": [
                 {
                     "id": "c213ed8742a9f",
@@ -75,6 +76,34 @@
                     "userId": "4469047b78ce",
                     "text": "Как дела",
                     "date": 1544520595576,
+                    "isHighlight": {
+                        "4469047b78ce": false,
+                        "e1193c408d2c5": false
+                    },
+                    "isVisible": {
+                        "4469047b78ce": true,
+                        "e1193c408d2c5": true
+                    }
+                },
+                {
+                    "id": "113d472b3d635",
+                    "userId": "4469047b78ce",
+                    "text": "ауууууууу, есть ли здесь кто живой?",
+                    "date": 1544555836805,
+                    "isHighlight": {
+                        "4469047b78ce": false,
+                        "e1193c408d2c5": false
+                    },
+                    "isVisible": {
+                        "4469047b78ce": true,
+                        "e1193c408d2c5": true
+                    }
+                },
+                {
+                    "id": "4b5f883e527d7",
+                    "userId": "e1193c408d2c5",
+                    "text": "да тут я",
+                    "date": 1544556002851,
                     "isHighlight": {
                         "4469047b78ce": false,
                         "e1193c408d2c5": false
