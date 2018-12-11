@@ -80,14 +80,32 @@ router.post('/:chatId/messages', (req, res, next) => {
 });
 
 // PATCH /chats/:chatId
+// router.patch('/:chatId', (req, res, next) => {
+//     const chat = db
+//         .get('chats')
+//         .find({ chatId: req.params.chatId })
+//         .assign(req.body)
+//         .value();
+
+//     db.write();
+
+//     res.json({ status: 'OK', data: chat });
+// });
+
+// PATCH /chats/:chatId?
 router.patch('/:chatId', (req, res, next) => {
     const chat = db
         .get('chats')
         .find({ chatId: req.params.chatId })
-        .assign(req.body)
-        .value();
+        .get('messages')
+        .find({ id: req.query.id })
+        .get('isHighlight')
+        .get(req.query.userId)
+        .toggleBoolean()
+        .write();
 
-    db.write();
+    // db.write();
+    console.log('chat', chat);
 
     res.json({ status: 'OK', data: chat });
 });

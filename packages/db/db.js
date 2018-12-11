@@ -6,4 +6,11 @@ const db = low(adapter);
 
 db.defaults({ messages: [] }).write();
 
+db._.mixin({
+    toggleBoolean: elem => {
+        console.log('elem', elem);
+        return !elem;
+    }
+});
+
 module.exports = db;
