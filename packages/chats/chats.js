@@ -110,17 +110,26 @@ router.post('/:chatId/messages', (req, res, next) => {
 
 // PATCH /chats/:chatId?
 router.patch('/:chatId', (req, res, next) => {
-    const chat = db
+    const value = db
         .get('chats')
         .find({ chatId: req.params.chatId })
         .get('messages')
         .find({ id: req.query.id })
         .get('isHighlight')
         .get(req.query.myId)
-        .toggleBoolean()
         .value();
 
-    db.write();
+    console.log('value', value);
+
+    const chat = db
+        .get('chats')
+        .find({ chatId: req.params.chatId })
+        .get('messages')
+        .find({ id: req.query.id })
+        .get('isHighlight')
+        .set(req.query.myId, !value)
+        .write();
+
     console.log('chat', chat);
 
     res.json({ status: 'OK', data: chat });
