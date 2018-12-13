@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const db = require('../db/db');
 const { validate } = require('jsonschema');
+const { newMessages } = require('../core/store');
 
 const newChat = users => ({
     chatId: String(
@@ -92,6 +93,10 @@ router.post('/:chatId/messages', (req, res, next) => {
         .write();
 
     console.log(chat);
+
+    // добавление сообщения в память
+    newMessages['4469047b78ce'].push(message);
+    console.log('newMessages', newMessages);
 
     res.json({ status: 'OK', data: message });
 });
