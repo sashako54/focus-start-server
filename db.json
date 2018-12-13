@@ -1,27 +1,4 @@
 {
-    "messages": [
-        {
-            "id": "70607890d421a",
-            "name": "user1",
-            "text": "привет, как дела?",
-            "date": "0231851315312",
-            "isCompleted": false
-        },
-        {
-            "id": "6939f15c93b31",
-            "name": "sashako54",
-            "text": "Нормально, а у тебя?",
-            "date": "0231851315312",
-            "isCompleted": false
-        },
-        {
-            "id": "9b49db3af96d7",
-            "name": "user2",
-            "text": "Всем привет!",
-            "date": "0231851315312",
-            "isCompleted": false
-        }
-    ],
     "users": [
         {
             "id": "4469047b78ce",

@@ -137,9 +137,21 @@ router.patch('/:chatId', (req, res, next) => {
 });
 
 // DELETE /chats/:id
-router.delete('/:id', (req, res) => {
+// router.delete('/:id', (req, res) => {
+//     db.get('chats')
+//         .remove({ id: req.params.id })
+//         .write();
+
+//     res.json({ status: 'OK' });
+// });
+
+// DELETE /chats/:chatId/messages? TODO: реализовать удаление сообщений
+router.delete('/:chatId/messages', (req, res) => {
     db.get('chats')
-        .remove({ id: req.params.id })
+        .find({ id: req.params.chatId })
+        .get('messages')
+        .filter(obj => obj.isHighlight[req.cookies.id] === true)
+
         .write();
 
     res.json({ status: 'OK' });
