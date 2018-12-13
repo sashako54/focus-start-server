@@ -95,8 +95,15 @@ router.post('/:chatId/messages', (req, res, next) => {
     console.log(chat);
 
     // добавление сообщения в память
-    newMessages['4469047b78ce'].push(message);
-    console.log('newMessages', newMessages);
+
+    usersId
+        .filter(id => id !== req.cookies.id)
+        .map(id => {
+            if (!newMessages[id]) {
+                newMessages[id] = [];
+            }
+            newMessages[id].push(message);
+        });
 
     res.json({ status: 'OK', data: message });
 });

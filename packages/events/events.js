@@ -6,12 +6,13 @@ const { newMessages } = require('../core/store');
 
 router.get('/new-messages', (req, res) => {
     let newMessagesUpdate;
-    if (newMessages[req.cookies.id].length !== 0) {
-        newMessagesUpdate = [].concat(newMessages[req.cookies.id]);
-        newMessages[req.cookies.id] = [];
-        res.json({ status: 'OK', data: newMessagesUpdate });
+    if (newMessages[req.cookies.id]) {
+        if (newMessages[req.cookies.id].length !== 0) {
+            newMessagesUpdate = [].concat(newMessages[req.cookies.id]);
+            newMessages[req.cookies.id] = [];
+            res.json({ status: 'OK', data: newMessagesUpdate });
+        }
     }
-
     res.json({ status: 'FAIL' });
 });
 
