@@ -167,6 +167,7 @@ router.patch('/:chatId/messages', (req, res, next) => {
             .get('isVisible')
             .set(req.cookies.id, false)
             .write();
+
         console.log(
             'req.body.highlightMessagesList',
             req.body.highlightMessagesList
@@ -176,6 +177,28 @@ router.patch('/:chatId/messages', (req, res, next) => {
         console.log('req.cookies.id', req.cookies.id);
     }
 
+    // проверка флагов, на случай, если isVisivle все false -> удалить сообщение
+    for (let prop of req.body.highlightMessagesList) {
+        const isVisible = db
+            .get('chats')
+            .find({ chatId: req.params.chatId })
+            .get('messages')
+            .find({ id: prop })
+            .get('isVisible')
+            .value();
+
+        const conditionOfDelete = Object.values(isVisible).every(item => {
+            if (item === false) return true;
+        });
+
+        if (conditionOfDelete) {
+            db.get('chats')
+                .find({ chatId: req.params.chatId })
+                .get('messages')
+                .remove({ id: prop })
+                .write();
+        }
+    }
     res.json({ status: 'OK' });
 });
 
