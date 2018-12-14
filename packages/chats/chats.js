@@ -134,7 +134,7 @@ router.patch('/:chatId', (req, res, next) => {
 
     console.log('value', value);
 
-    const chat = db
+    const chat = db // TODO: посмотреть, нужен ли этот блок
         .get('chats')
         .find({ chatId: req.params.chatId })
         .get('messages')
@@ -158,13 +158,23 @@ router.patch('/:chatId', (req, res, next) => {
 // });
 
 // DELETE /chats/:chatId/messages? TODO: реализовать удаление сообщений
-router.delete('/:chatId/messages', (req, res) => {
-    db.get('chats')
-        .find({ id: req.params.chatId })
-        .get('messages')
-        .filter(obj => obj.isHighlight[req.cookies.id] === true)
-
-        .write();
+router.patch('/:chatId/messages', (req, res, next) => {
+    for (let prop of req.body.highlightMessagesList) {
+        db.get('chats')
+            .find({ chatId: req.params.chatId })
+            .get('messages')
+            .find({ id: prop })
+            .get('isVisible')
+            .set(req.cookies.id, false)
+            .write();
+        console.log(
+            'req.body.highlightMessagesList',
+            req.body.highlightMessagesList
+        );
+        console.log('req.params.chatId', req.params.chatId);
+        console.log('prop', prop);
+        console.log('req.cookies.id', req.cookies.id);
+    }
 
     res.json({ status: 'OK' });
 });
