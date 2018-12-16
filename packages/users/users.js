@@ -17,7 +17,7 @@ router.get('/', (req, res) => {
     console.log('cookie', req.cookies);
     const users = db.get('users').value();
 
-    users.map(user => delete user.id);
+    // users.map(user => delete user.id);
 
     res.json({ status: 'OK', data: users });
 });
