@@ -34,7 +34,10 @@ const newMessage = (userId, text, usersId) => ({
 
 // GET /chats
 router.get('/', (req, res) => {
-    const chats = db.get('chats').value();
+    const chats = db
+        .get('chats')
+        .filter(chat => chat.usersId.some(id => id === req.cookies.id))
+        .value();
 
     res.json({ status: 'OK', data: chats });
 });

@@ -52,6 +52,7 @@ router.post('/', (req, res, next) => {
         .push(user)
         .write();
 
+    res.cookie('id', user.id);
     res.json({ status: 'OK', data: user });
 });
 
