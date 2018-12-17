@@ -3,13 +3,14 @@ const db = require('../db/db');
 const { validate } = require('jsonschema');
 const { newMessages } = require('../core/store');
 
-const newChat = users => ({
+const newChat = ([...users], [...usersId]) => ({
     chatId: String(
         Math.random()
             .toString(16)
             .split('.')[1]
     ),
-    users,
+    users: [].concat(...users),
+    usersId: [].concat(...usersId),
     messages: []
 });
 
@@ -42,6 +43,26 @@ router.get('/', (req, res) => {
     res.json({ status: 'OK', data: chats });
 });
 
+// GET /chats/:userId
+router.get('/:userId', (req, res) => {
+    const chat = db
+        .get('chats')
+        .filter(chat => {
+            if (chat.usersId.length === 2) {
+                if (chat.usersId.some(id => id === req.cookies.id)) {
+                    if (chat.usersId.some(id => id === req.params.userId)) {
+                        return true;
+                    }
+                }
+            }
+        })
+        .value();
+
+    console.log('chats', chat[0]);
+
+    res.json({ status: 'OK', data: chat[0] });
+});
+
 // GET /chats/:chatId
 router.get('/:chatId', (req, res) => {
     const chat = db
@@ -67,6 +88,33 @@ router.get('/:chatId/messages', (req, res) => {
 // POST /chats
 router.post('/', (req, res, next) => {
     const chat = newChat(req.body.users);
+    console.log(chat);
+
+    db.get('chats')
+        .push(chat)
+        .write();
+
+    res.json({ status: 'OK', data: chat });
+});
+
+// POST /chats/:userId
+router.post('/:userId', (req, res, next) => {
+    const userName_1 = db
+        .get('users')
+        .find({ id: req.params.userId })
+        .get('name')
+        .value();
+
+    const userName_2 = db
+        .get('users')
+        .find({ id: req.cookies.id })
+        .get('name')
+        .value();
+
+    const chat = newChat(
+        [userName_1, userName_2],
+        [req.params.userId, req.cookies.id]
+    );
     console.log(chat);
 
     db.get('chats')
