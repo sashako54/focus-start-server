@@ -102,6 +102,12 @@
             "users": ["Misha", "sasha"],
             "usersId": ["d0200d3d55b86", "4469047b78ce"],
             "messages": []
+        },
+        {
+            "chatId": "ed3f5f3130602",
+            "users": ["Misha", null],
+            "usersId": ["d0200d3d55b86", null],
+            "messages": []
         }
     ],
     "messages": []

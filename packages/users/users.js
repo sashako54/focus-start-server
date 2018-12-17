@@ -12,10 +12,23 @@ const newUser = name => ({
     chats: []
 });
 
+// GET /users/all
+router.get('/all', (req, res) => {
+    console.log('cookie', req.cookies);
+    const users = db.get('users').value();
+
+    // users.map(user => delete user.id);
+
+    res.json({ status: 'OK', data: users });
+});
+
 // GET /users
 router.get('/', (req, res) => {
     console.log('cookie', req.cookies);
-    const users = db.get('users').value();
+    const users = db
+        .get('users')
+        .filter(user => user.id !== req.cookies.id)
+        .value();
 
     // users.map(user => delete user.id);
 
