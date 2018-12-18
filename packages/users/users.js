@@ -66,6 +66,7 @@ router.post('/', (req, res, next) => {
         .write();
 
     res.cookie('id', user.id);
+    res.cookie('name', user.name);
     res.json({ status: 'OK', data: user });
 });
 
