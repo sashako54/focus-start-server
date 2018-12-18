@@ -1,99 +1,79 @@
 {
-  "users": [
-    {
-      "id": "4469047b78ce",
-      "name": "sasha",
-      "chats": [
-        "f1f87db0abd2f",
-        "5b942830bc7d7"
-      ]
-    },
-    {
-      "id": "e1193c408d2c5",
-      "name": "evgen",
-      "chats": [
-        "f1f87db0abd2f"
-      ]
-    },
-    {
-      "id": "d0200d3d55b86",
-      "name": "Misha",
-      "chats": [
-        "5b942830bc7d7"
-      ]
-    }
-  ],
-  "chats": [
-    {
-      "chatId": "f1f87db0abd2f",
-      "users": [
-        "sasha",
-        "evgen"
-      ],
-      "usersId": [
-        "4469047b78ce",
-        "e1193c408d2c5"
-      ],
-      "messages": [
+    "users": [
         {
-          "id": "c213ed8742a9f",
-          "name": "sasha",
-          "userId": "4469047b78ce",
-          "text": "привет!",
-          "date": 1544426177036,
-          "isHighlight": {
-            "4469047b78ce": false,
-            "e1193c408d2c5": false
-          },
-          "isVisible": {
-            "4469047b78ce": true,
-            "e1193c408d2c5": false
-          }
+            "id": "4469047b78ce",
+            "name": "sasha",
+            "chats": ["f1f87db0abd2f", "5b942830bc7d7"]
         },
         {
-          "id": "f010e4734e7c4",
-          "name": "evgen",
-          "userId": "e1193c408d2c5",
-          "text": "Привееет",
-          "date": 1544430575100,
-          "isHighlight": {
-            "4469047b78ce": false,
-            "e1193c408d2c5": false
-          },
-          "isVisible": {
-            "4469047b78ce": true,
-            "e1193c408d2c5": true
-          }
+            "id": "e1193c408d2c5",
+            "name": "evgen",
+            "chats": ["f1f87db0abd2f"]
         },
         {
-          "id": "86d4cb6f4c05d",
-          "name": "sasha",
-          "userId": "4469047b78ce",
-          "text": "Как дела",
-          "date": 1544520595576,
-          "isHighlight": {
-            "4469047b78ce": false,
-            "e1193c408d2c5": false
-          },
-          "isVisible": {
-            "4469047b78ce": true,
-            "e1193c408d2c5": true
-          }
+            "id": "d0200d3d55b86",
+            "name": "Misha",
+            "chats": ["5b942830bc7d7"]
         }
-      ]
-    },
-    {
-      "chatId": "5b942830bc7d7",
-      "users": [
-        "Misha",
-        "sasha"
-      ],
-      "usersId": [
-        "d0200d3d55b86",
-        "4469047b78ce"
-      ],
-      "messages": []
-    }
-  ],
-  "messages": []
+    ],
+    "chats": [
+        {
+            "chatId": "f1f87db0abd2f",
+            "users": ["sasha", "evgen"],
+            "usersId": ["4469047b78ce", "e1193c408d2c5"],
+            "messages": [
+                {
+                    "id": "c213ed8742a9f",
+                    "name": "sasha",
+                    "userId": "4469047b78ce",
+                    "text": "привет!",
+                    "date": 1544426177036,
+                    "isHighlight": {
+                        "4469047b78ce": false,
+                        "e1193c408d2c5": false
+                    },
+                    "isVisible": {
+                        "4469047b78ce": true,
+                        "e1193c408d2c5": false
+                    }
+                },
+                {
+                    "id": "f010e4734e7c4",
+                    "name": "evgen",
+                    "userId": "e1193c408d2c5",
+                    "text": "Привееет",
+                    "date": 1544430575100,
+                    "isHighlight": {
+                        "4469047b78ce": false,
+                        "e1193c408d2c5": false
+                    },
+                    "isVisible": {
+                        "4469047b78ce": true,
+                        "e1193c408d2c5": true
+                    }
+                },
+                {
+                    "id": "86d4cb6f4c05d",
+                    "name": "sasha",
+                    "userId": "4469047b78ce",
+                    "text": "Как дела",
+                    "date": 1544520595576,
+                    "isHighlight": {
+                        "4469047b78ce": false,
+                        "e1193c408d2c5": false
+                    },
+                    "isVisible": {
+                        "4469047b78ce": true,
+                        "e1193c408d2c5": true
+                    }
+                }
+            ]
+        },
+        {
+            "chatId": "5b942830bc7d7",
+            "users": ["Misha", "sasha"],
+            "usersId": ["d0200d3d55b86", "4469047b78ce"],
+            "messages": []
+        }
+    ]
 }

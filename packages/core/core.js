@@ -3,18 +3,11 @@ const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const error = require('../error/error');
-const messagesRoutes = require('../messages/messages');
 const usersRoutes = require('../users/users');
 const chatsRoutes = require('../chats/chats');
 const eventsRoutes = require('../events/events');
 
 const app = express();
-
-// app.use((req, res, next) => {
-//     setTimeout(() => {
-//         next();
-//     }, 2000);
-// });
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -24,8 +17,6 @@ app.use(cookieParser());
 app.use('/api/v001/users', usersRoutes);
 
 app.use('/api/v001/chats', chatsRoutes);
-
-app.use('/api/v001/messages', messagesRoutes);
 
 app.use('/api/v001/events', eventsRoutes);
 
