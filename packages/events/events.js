@@ -4,13 +4,17 @@ const { newMessages } = require('../core/store');
 
 //GET/new-message
 
-router.get('/new-messages', (req, res) => {
+router.get('/new-messages/:chatId', (req, res) => {
+    const { chatId } = req.params;
+    const { id } = req.cookies;
     let newMessagesUpdate;
-    if (newMessages[req.cookies.id]) {
-        if (newMessages[req.cookies.id].length !== 0) {
-            newMessagesUpdate = [].concat(newMessages[req.cookies.id]);
-            newMessages[req.cookies.id] = [];
-            res.json({ status: 'OK', data: newMessagesUpdate });
+    if (newMessages[chatId]) {
+        if (newMessages[chatId][id]) {
+            if (newMessages[chatId][id].length !== 0) {
+                newMessagesUpdate = [].concat(newMessages[chatId][id]);
+                newMessages[chatId][id] = [];
+                res.json({ status: 'OK', data: newMessagesUpdate });
+            }
         }
     }
     res.json({ status: 'FAIL' });

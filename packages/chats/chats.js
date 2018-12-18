@@ -151,11 +151,16 @@ router.post('/:chatId/messages', (req, res, next) => {
     usersId
         .filter(id => id !== req.cookies.id)
         .map(id => {
-            if (!newMessages[id]) {
-                newMessages[id] = [];
+            if (!newMessages[req.params.chatId]) {
+                newMessages[req.params.chatId] = {};
             }
-            newMessages[id].push(message);
+            if (!newMessages[req.params.chatId][id]) {
+                newMessages[req.params.chatId][id] = [];
+            }
+            newMessages[req.params.chatId][id].push(message);
         });
+
+    console.log('newMessages', newMessages);
 
     res.json({ status: 'OK', data: message });
 });
