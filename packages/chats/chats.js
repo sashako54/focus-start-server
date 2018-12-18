@@ -14,12 +14,13 @@ const newChat = ([...users], [...usersId]) => ({
     messages: []
 });
 
-const newMessage = (userId, text, usersId) => ({
+const newMessage = (userId, text, usersId, name) => ({
     id: String(
         Math.random()
             .toString(16)
             .split('.')[1]
     ),
+    name,
     userId,
     text,
     date: new Date().getTime(),
@@ -134,7 +135,12 @@ router.post('/:chatId/messages', (req, res, next) => {
 
     console.log('usersId', usersId);
 
-    const message = newMessage(req.cookies.id, req.body.text, usersId);
+    const message = newMessage(
+        req.cookies.id,
+        req.body.text,
+        usersId,
+        req.cookies.name
+    );
 
     const chat = db
         .get('chats')

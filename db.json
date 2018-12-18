@@ -66,34 +66,6 @@
                         "4469047b78ce": true,
                         "e1193c408d2c5": true
                     }
-                },
-                {
-                    "id": "113d472b3d635",
-                    "userId": "4469047b78ce",
-                    "text": "ауууууууу, есть ли здесь кто живой?",
-                    "date": 1544555836805,
-                    "isHighlight": {
-                        "4469047b78ce": false,
-                        "e1193c408d2c5": false
-                    },
-                    "isVisible": {
-                        "4469047b78ce": true,
-                        "e1193c408d2c5": true
-                    }
-                },
-                {
-                    "id": "4b5f883e527d7",
-                    "userId": "e1193c408d2c5",
-                    "text": "да тут я",
-                    "date": 1544556002851,
-                    "isHighlight": {
-                        "4469047b78ce": false,
-                        "e1193c408d2c5": false
-                    },
-                    "isVisible": {
-                        "4469047b78ce": true,
-                        "e1193c408d2c5": true
-                    }
                 }
             ]
         },
@@ -101,12 +73,6 @@
             "chatId": "a0d1c00442a64",
             "users": ["Misha", "sasha"],
             "usersId": ["d0200d3d55b86", "4469047b78ce"],
-            "messages": []
-        },
-        {
-            "chatId": "ed3f5f3130602",
-            "users": ["Misha", null],
-            "usersId": ["d0200d3d55b86", null],
             "messages": []
         }
     ],
