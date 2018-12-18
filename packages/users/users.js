@@ -13,6 +13,7 @@ const newUser = name => ({
 });
 
 // GET /users/all
+// возвращает всех users
 router.get('/all', (req, res) => {
     console.log('cookie', req.cookies);
     const users = db.get('users').value();
@@ -23,6 +24,7 @@ router.get('/all', (req, res) => {
 });
 
 // GET /users
+// возвращает всех users кроме самого user
 router.get('/', (req, res) => {
     console.log('cookie', req.cookies);
     const users = db
@@ -30,19 +32,7 @@ router.get('/', (req, res) => {
         .filter(user => user.id !== req.cookies.id)
         .value();
 
-    // users.map(user => delete user.id);
-
     res.json({ status: 'OK', data: users });
-});
-
-// GET /users/:id
-router.get('/:id', (req, res) => {
-    const user = db
-        .get('users')
-        .find({ id: req.params.id })
-        .value();
-
-    res.json({ status: 'OK', data: user });
 });
 
 // POST /users

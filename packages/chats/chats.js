@@ -35,6 +35,7 @@ const newMessage = (userId, text, usersId, name) => ({
 });
 
 // GET /chats
+// запрашивает чаты, в которых состоит user
 router.get('/', (req, res) => {
     const chats = db
         .get('chats')
@@ -45,6 +46,8 @@ router.get('/', (req, res) => {
 });
 
 // GET /chats/:userId
+// ищет чат, в котором только 2 users, среди которых 1 сам user, а второй, на которого кликнули
+// для проверки существования чата с конкретным юзером
 router.get('/:userId', (req, res) => {
     const chat = db
         .get('chats')
@@ -64,16 +67,6 @@ router.get('/:userId', (req, res) => {
     res.json({ status: 'OK', data: chat[0] });
 });
 
-// GET /chats/:chatId
-router.get('/:chatId', (req, res) => {
-    const chat = db
-        .get('chats')
-        .find({ chatId: req.params.chatId })
-        .value();
-
-    res.json({ status: 'OK', data: chat });
-});
-
 // GET /chats/:chatId/messages
 router.get('/:chatId/messages', (req, res) => {
     const messages = db
@@ -86,19 +79,8 @@ router.get('/:chatId/messages', (req, res) => {
     res.json({ status: 'OK', data: messages });
 });
 
-// POST /chats
-router.post('/', (req, res, next) => {
-    const chat = newChat(req.body.users);
-    console.log(chat);
-
-    db.get('chats')
-        .push(chat)
-        .write();
-
-    res.json({ status: 'OK', data: chat });
-});
-
 // POST /chats/:userId
+// создание чата по userId
 router.post('/:userId', (req, res, next) => {
     const userName_1 = db
         .get('users')
@@ -120,6 +102,19 @@ router.post('/:userId', (req, res, next) => {
 
     db.get('chats')
         .push(chat)
+        .write();
+
+    // добавим chatId в user.chats
+    db.get('users')
+        .find({ id: req.params.userId })
+        .get('chats')
+        .push(chat.chatId)
+        .write();
+
+    db.get('users')
+        .find({ id: req.cookies.id })
+        .get('chats')
+        .push(chat.chatId)
         .write();
 
     res.json({ status: 'OK', data: chat });
@@ -165,56 +160,7 @@ router.post('/:chatId/messages', (req, res, next) => {
     res.json({ status: 'OK', data: message });
 });
 
-// PATCH /chats/:chatId
-// router.patch('/:chatId', (req, res, next) => {
-//     const chat = db
-//         .get('chats')
-//         .find({ chatId: req.params.chatId })
-//         .assign(req.body)
-//         .value();
-
-//     db.write();
-
-//     res.json({ status: 'OK', data: chat });
-// });
-
-// PATCH /chats/:chatId?
-router.patch('/:chatId', (req, res, next) => {
-    const value = db
-        .get('chats')
-        .find({ chatId: req.params.chatId })
-        .get('messages')
-        .find({ id: req.query.id })
-        .get('isHighlight')
-        .get(req.query.myId)
-        .value();
-
-    console.log('value', value);
-
-    const chat = db // TODO: посмотреть, нужен ли этот блок
-        .get('chats')
-        .find({ chatId: req.params.chatId })
-        .get('messages')
-        .find({ id: req.query.id })
-        .get('isHighlight')
-        .set(req.query.myId, !value)
-        .write();
-
-    console.log('chat', chat);
-
-    res.json({ status: 'OK', data: chat });
-});
-
-// DELETE /chats/:id
-// router.delete('/:id', (req, res) => {
-//     db.get('chats')
-//         .remove({ id: req.params.id })
-//         .write();
-
-//     res.json({ status: 'OK' });
-// });
-
-// DELETE /chats/:chatId/messages? TODO: реализовать удаление сообщений
+// DELETE /chats/:chatId/messages
 router.patch('/:chatId/messages', (req, res, next) => {
     for (let prop of req.body.highlightMessagesList) {
         db.get('chats')
