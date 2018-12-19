@@ -40,6 +40,7 @@ router.get('/', (req, res) => {
     const chats = db
         .get('chats')
         .filter(chat => chat.usersId.some(id => id === req.cookies.id))
+        // TODO: отправлять только chatId и chatName
         .value();
 
     res.json({ status: 'OK', data: chats });

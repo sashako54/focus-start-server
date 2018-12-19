@@ -1,22 +1,41 @@
 const router = require('express').Router();
-const db = require('../db/db');
 const { newMessages } = require('../core/store');
 
-//GET/new-message
-
+//GET/new-messages/:chatId
 router.get('/new-messages/:chatId', (req, res) => {
     const { chatId } = req.params;
     const { id } = req.cookies;
-    let newMessagesUpdate;
+    let newMessagesUpdate = [];
+    let numNewMessages = {};
+
+    // формирование списка новых сообщений
     if (newMessages[chatId]) {
         if (newMessages[chatId][id]) {
             if (newMessages[chatId][id].length !== 0) {
                 newMessagesUpdate = [].concat(newMessages[chatId][id]);
                 newMessages[chatId][id] = [];
-                res.json({ status: 'OK', data: newMessagesUpdate });
             }
         }
     }
+
+    // получение количества новых сообщений по всем чатам,
+    // в которых состоит user, кроме того, который передан в параметрах
+    for (let key in newMessages) {
+        console.log('key', key);
+        if (key !== chatId) {
+            if (newMessages[key][id] && newMessages[key][id].length) {
+                numNewMessages[key] = newMessages[key][id].length;
+            }
+        }
+    }
+
+    if (Object.keys(numNewMessages).length || newMessagesUpdate.length) {
+        res.json({
+            status: 'OK',
+            data: { newMessagesUpdate, numNewMessages }
+        });
+    }
+
     res.json({ status: 'FAIL' });
 });
 
