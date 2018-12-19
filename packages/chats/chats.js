@@ -76,7 +76,13 @@ router.get('/:chatId/messages', (req, res) => {
         .filter(obj => obj.isVisible[req.cookies.id] === true)
         .value();
 
-    res.json({ status: 'OK', data: messages });
+    const chatName = db
+        .get('chats')
+        .find({ chatId: req.params.chatId })
+        .get('users')
+        .value();
+
+    res.json({ status: 'OK', data: { messages, chatName } });
 });
 
 // POST /chats/:userId
