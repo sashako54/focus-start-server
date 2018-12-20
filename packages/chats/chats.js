@@ -39,8 +39,10 @@ const newMessage = (userId, text, usersId, name) => ({
 router.get('/', (req, res) => {
     const chats = db
         .get('chats')
+        // берем все чаты, в которых есть userId
         .filter(chat => chat.usersId.some(id => id === req.cookies.id))
-        // TODO: отправлять только chatId и chatName
+        // отправляем только chatId и users
+        .map(chat => ({ chatId: chat.chatId, users: chat.users }))
         .value();
 
     res.json({ status: 'OK', data: chats });
