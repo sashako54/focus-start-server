@@ -2,29 +2,39 @@
     "users": [
         {
             "id": "4469047b78ce",
-            "name": "sasha",
-            "chats": ["f1f87db0abd2f", "5b942830bc7d7"]
+            "name": "Sasha",
+            "chats": [
+                "f1f87db0abd2f",
+                "5b942830bc7d7",
+                "ce71383801b56",
+                "f042c769ba6e5"
+            ]
         },
         {
             "id": "e1193c408d2c5",
-            "name": "evgen",
-            "chats": ["f1f87db0abd2f"]
+            "name": "Evgen",
+            "chats": ["f1f87db0abd2f", "ce71383801b56"]
         },
         {
             "id": "d0200d3d55b86",
             "name": "Misha",
-            "chats": ["5b942830bc7d7"]
+            "chats": ["5b942830bc7d7", "ead815a62e0a6"]
+        },
+        {
+            "id": "3f0fa60aa22e6",
+            "name": "Petya",
+            "chats": ["ce71383801b56", "f042c769ba6e5", "ead815a62e0a6"]
         }
     ],
     "chats": [
         {
             "chatId": "f1f87db0abd2f",
-            "users": ["sasha", "evgen"],
+            "users": ["Sasha", "Evgen"],
             "usersId": ["4469047b78ce", "e1193c408d2c5"],
             "messages": [
                 {
                     "id": "c213ed8742a9f",
-                    "name": "sasha",
+                    "name": "Sasha",
                     "userId": "4469047b78ce",
                     "text": "привет!",
                     "date": 1544426177036,
@@ -39,7 +49,7 @@
                 },
                 {
                     "id": "f010e4734e7c4",
-                    "name": "evgen",
+                    "name": "Evgen",
                     "userId": "e1193c408d2c5",
                     "text": "Привееет",
                     "date": 1544430575100,
@@ -54,7 +64,7 @@
                 },
                 {
                     "id": "86d4cb6f4c05d",
-                    "name": "sasha",
+                    "name": "Sasha",
                     "userId": "4469047b78ce",
                     "text": "Как дела",
                     "date": 1544520595576,
@@ -71,8 +81,87 @@
         },
         {
             "chatId": "5b942830bc7d7",
-            "users": ["Misha", "sasha"],
+            "users": ["Misha", "Sasha"],
             "usersId": ["d0200d3d55b86", "4469047b78ce"],
+            "messages": []
+        },
+        {
+            "chatId": "ce71383801b56",
+            "users": ["Petya", "Sasha", "Evgen"],
+            "usersId": ["3f0fa60aa22e6", "4469047b78ce", "e1193c408d2c5"],
+            "messages": []
+        },
+        {
+            "chatId": "f042c769ba6e5",
+            "users": ["Petya", "Sasha"],
+            "usersId": ["3f0fa60aa22e6", "4469047b78ce"],
+            "messages": [
+                {
+                    "id": "7c643f046b2a7",
+                    "name": "Sasha",
+                    "userId": "4469047b78ce",
+                    "text": "привет",
+                    "date": 1545306737680,
+                    "isHighlight": {
+                        "3f0fa60aa22e6": false,
+                        "4469047b78ce": false
+                    },
+                    "isVisible": {
+                        "3f0fa60aa22e6": true,
+                        "4469047b78ce": true
+                    }
+                },
+                {
+                    "id": "69cca53340de2",
+                    "name": "Sasha",
+                    "userId": "4469047b78ce",
+                    "text": "привееет",
+                    "date": 1545306751133,
+                    "isHighlight": {
+                        "3f0fa60aa22e6": false,
+                        "4469047b78ce": false
+                    },
+                    "isVisible": {
+                        "3f0fa60aa22e6": true,
+                        "4469047b78ce": true
+                    }
+                },
+                {
+                    "id": "8957b7454a919",
+                    "name": "Sasha",
+                    "userId": "4469047b78ce",
+                    "text": "аууу ",
+                    "date": 1545306753575,
+                    "isHighlight": {
+                        "3f0fa60aa22e6": false,
+                        "4469047b78ce": false
+                    },
+                    "isVisible": {
+                        "3f0fa60aa22e6": true,
+                        "4469047b78ce": true
+                    }
+                },
+                {
+                    "id": "381943f4aaa2e",
+                    "name": "Sasha",
+                    "userId": "4469047b78ce",
+                    "text": "ты где? ",
+                    "date": 1545306754646,
+                    "isHighlight": {
+                        "3f0fa60aa22e6": false,
+                        "4469047b78ce": false
+                    },
+                    "isVisible": {
+                        "3f0fa60aa22e6": true,
+                        "4469047b78ce": true
+                    }
+                }
+            ]
+        },
+        {
+            "chatId": "ead815a62e0a6",
+            "users": ["Misha", "Petya"],
+            "usersId": ["d0200d3d55b86", "3f0fa60aa22e6"],
             "messages": []
         }
     ]
