@@ -1,6 +1,5 @@
 const router = require('express').Router();
 const db = require('../db/db');
-const { validate } = require('jsonschema');
 
 const newUser = name => ({
     id: String(
@@ -12,38 +11,38 @@ const newUser = name => ({
     chats: []
 });
 
-// GET /users
-router.get('/', (req, res) => {
+// GET /users/all
+// возвращает всех users
+router.get('/all', (req, res) => {
     console.log('cookie', req.cookies);
     const users = db.get('users').value();
-
-    users.map(user => delete user.id);
 
     res.json({ status: 'OK', data: users });
 });
 
-// GET /users/:id
-router.get('/:id', (req, res) => {
-    const user = db
+// GET /users
+// возвращает всех users кроме самого user
+router.get('/', (req, res) => {
+    console.log('cookie', req.cookies);
+    const users = db
         .get('users')
-        .find({ id: req.params.id })
+        .filter(user => user.id !== req.cookies.id)
         .value();
 
-    res.json({ status: 'OK', data: user });
+    res.json({ status: 'OK', data: users });
 });
 
 // POST /users
 router.post('/', (req, res, next) => {
     const user = newUser(req.body.name);
-    console.log(user);
 
     // проверка
-    const existUser = db
+    const existUserCondition = db
         .get('users')
         .find({ name: req.body.name })
         .value();
 
-    if (existUser) {
+    if (existUserCondition) {
         next(new Error('THIS_NICKNAME_ALREADY_EXISTS'));
         res.json({ status: 'FAIL', data: user });
     }
@@ -52,6 +51,8 @@ router.post('/', (req, res, next) => {
         .push(user)
         .write();
 
+    res.cookie('id', user.id);
+    res.cookie('name', user.name);
     res.json({ status: 'OK', data: user });
 });
 

@@ -4,6 +4,6 @@ const FileSync = require('lowdb/adapters/FileSync');
 const adapter = new FileSync('db.json');
 const db = low(adapter);
 
-db.defaults({ messages: [] }).write();
+db.defaults({ users: [], chats: [] }).write();
 
 module.exports = db;
