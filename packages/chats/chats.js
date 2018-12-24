@@ -1,16 +1,15 @@
 const router = require('express').Router();
 const db = require('../db/db');
-const { validate } = require('jsonschema');
 const { newMessages } = require('../core/store');
 
-const newChat = ([...users], [...usersId]) => ({
+const newChat = (users, usersId) => ({
     chatId: String(
         Math.random()
             .toString(16)
             .split('.')[1]
     ),
-    users: [].concat(...users),
-    usersId: [].concat(...usersId),
+    users,
+    usersId,
     messages: []
 });
 
@@ -24,11 +23,11 @@ const newMessage = (userId, text, usersId, name) => ({
     userId,
     text,
     date: new Date().getTime(),
-    isHighlight: usersId.reduce((previousValue, currentValue, index, array) => {
+    isHighlight: usersId.reduce((previousValue, currentValue) => {
         previousValue[currentValue] = false;
         return previousValue;
     }, {}),
-    isVisible: usersId.reduce((previousValue, currentValue, index, array) => {
+    isVisible: usersId.reduce((previousValue, currentValue) => {
         previousValue[currentValue] = true;
         return previousValue;
     }, {})
@@ -91,6 +90,7 @@ router.get('/:chatId/messages', (req, res) => {
 // POST /chats/:userId
 // создание чата по userId
 router.post('/:userId', (req, res, next) => {
+    const usersId = [req.params.userId, req.cookies.id];
     const userName_1 = db
         .get('users')
         .find({ id: req.params.userId })
@@ -103,10 +103,7 @@ router.post('/:userId', (req, res, next) => {
         .get('name')
         .value();
 
-    const chat = newChat(
-        [userName_1, userName_2],
-        [req.params.userId, req.cookies.id]
-    );
+    const chat = newChat([userName_1, userName_2], usersId);
     console.log(chat);
 
     db.get('chats')
@@ -114,17 +111,13 @@ router.post('/:userId', (req, res, next) => {
         .write();
 
     // добавим chatId в user.chats
-    db.get('users')
-        .find({ id: req.params.userId })
-        .get('chats')
-        .push(chat.chatId)
-        .write();
-
-    db.get('users')
-        .find({ id: req.cookies.id })
-        .get('chats')
-        .push(chat.chatId)
-        .write();
+    for (const prop of usersId) {
+        db.get('users')
+            .find({ id: prop })
+            .get('chats')
+            .push(chat.chatId)
+            .write();
+    }
 
     res.json({ status: 'OK', data: chat });
 });
@@ -146,20 +139,16 @@ router.post('/:chatId/messages', (req, res, next) => {
         req.cookies.name
     );
 
-    const chat = db
-        .get('chats')
+    db.get('chats')
         .find({ chatId: req.params.chatId })
         .get('messages')
         .push(message)
         .write();
 
-    console.log(chat);
-
     // добавление сообщения в память
-
     usersId
         .filter(id => id !== req.cookies.id)
-        .map(id => {
+        .forEach(id => {
             if (!newMessages[req.params.chatId]) {
                 newMessages[req.params.chatId] = {};
             }
@@ -204,9 +193,9 @@ router.patch('/:chatId/messages', (req, res, next) => {
             .get('isVisible')
             .value();
 
-        const conditionOfDelete = Object.values(isVisible).every(item => {
-            if (item === false) return true;
-        });
+        const conditionOfDelete = Object.values(isVisible).every(
+            item => item === false
+        );
 
         if (conditionOfDelete) {
             db.get('chats')
