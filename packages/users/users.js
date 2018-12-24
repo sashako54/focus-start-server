@@ -1,6 +1,5 @@
 const router = require('express').Router();
 const db = require('../db/db');
-const { validate } = require('jsonschema');
 
 const newUser = name => ({
     id: String(
@@ -17,8 +16,6 @@ const newUser = name => ({
 router.get('/all', (req, res) => {
     console.log('cookie', req.cookies);
     const users = db.get('users').value();
-
-    // users.map(user => delete user.id);
 
     res.json({ status: 'OK', data: users });
 });
@@ -38,15 +35,14 @@ router.get('/', (req, res) => {
 // POST /users
 router.post('/', (req, res, next) => {
     const user = newUser(req.body.name);
-    console.log(user);
 
     // проверка
-    const existUser = db
+    const existUserCondition = db
         .get('users')
         .find({ name: req.body.name })
         .value();
 
-    if (existUser) {
+    if (existUserCondition) {
         next(new Error('THIS_NICKNAME_ALREADY_EXISTS'));
         res.json({ status: 'FAIL', data: user });
     }

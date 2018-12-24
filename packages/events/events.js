@@ -9,12 +9,10 @@ router.get('/new-messages/:chatId', (req, res) => {
     let numNewMessages = {};
 
     // формирование списка новых сообщений
-    if (newMessages[chatId]) {
-        if (newMessages[chatId][id]) {
-            if (newMessages[chatId][id].length !== 0) {
-                newMessagesUpdate = [].concat(newMessages[chatId][id]);
-                newMessages[chatId][id] = [];
-            }
+    if (newMessages[chatId] && newMessages[chatId][id]) {
+        if (newMessages[chatId][id].length !== 0) {
+            newMessagesUpdate = [].concat(newMessages[chatId][id]);
+            newMessages[chatId][id] = [];
         }
     }
 
